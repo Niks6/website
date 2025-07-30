@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+ background: linear-gradient(135deg, #111827 0%, #232526 100%);            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+            position: relative;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 600px;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-form {
+            padding: 60px 40px;
+            background: white;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-text h3 {
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .info-text p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-control.error {
+            border-color: #e74c3c;
+            background: #fdf2f2;
+        }
+
+        .form-control.success {
+            border-color: #27ae60;
+            background: #f2fdf2;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .error-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn.loading {
+            pointer-events: none;
+        }
+
+        .submit-btn.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+            display: none;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info,
+            .contact-form {
+                padding: 40px 30px;
+            }
+            
+            .info-item:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()" title="Go Back">
+        ←
+    </button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Get In Touch</h1>
+            <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </div>
+        
+        <div class="content">
+            <div class="contact-info">
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-text">
+                        <h3>Address</h3>
+                        <p>123 Business Street<br>Suite 100, City, State 12345</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div class="info-text">
+                        <h3>Phone</h3>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">✉️</div>
+                    <div class="info-text">
+                        <h3>Email</h3>
+                        <p>hello@company.com</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">🕒</div>
+                    <div class="info-text">
+                        <h3>Business Hours</h3>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <div id="successMessage" class="success-message">
+                    Thank you for your message! We'll get back to you soon.
+                </div>
+                
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" class="form-control" required>
+                        <div class="error-message" id="nameError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" class="form-control" required>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control">
+                        <div class="error-message" id="phoneError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" class="form-control" required>
+                        <div class="error-message" id="subjectError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" class="form-control" required placeholder="Tell us how we can help you..."></textarea>
+                        <div class="error-message" id="messageError"></div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span id="btnText">Send Message</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Back button functionality
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // If no history, you can redirect to a default page
+                window.location.href = '/';
+            }
+        }
+
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const successMessage = document.getElementById('successMessage');
+
+        // Form validation functions
+        function validateName(name) {
+            return name.trim().length >= 2;
+        }
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validatePhone(phone) {
+            if (!phone.trim()) return true; // Optional field
+            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+            return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+        }
+
+        function validateSubject(subject) {
+            return subject.trim().length >= 3;
+        }
+
+        function validateMessage(message) {
+            return message.trim().length >= 10;
+        }
+
+        // Show error function
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(fieldId + 'Error');
+            
+            field.classList.add('error');
+            field.classList.remove('success');
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        }
+
+        // Show success function
+        function showSuccess(fieldId) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(fieldId + 'Error');
+            
+            field.classList.add('success');
+            field.classList.remove('error');
+            errorElement.classList.remove('show');
+        }
+
+        // Real-time validation
+        document.getElementById('name').addEventListener('blur', function() {
+            if (validateName(this.value)) {
+                showSuccess('name');
+            } else {
+                showError('name', 'Please enter a valid name (at least 2 characters)');
+            }
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            if (validateEmail(this.value)) {
+                showSuccess('email');
+            } else {
+                showError('email', 'Please enter a valid email address');
+            }
+        });
+
+        document.getElementById('phone').addEventListener('blur', function() {
+            if (validatePhone(this.value)) {
+                showSuccess('phone');
+            } else {
+                showError('phone', 'Please enter a valid phone number');
+            }
+        });
+
+        document.getElementById('subject').addEventListener('blur', function() {
+            if (validateSubject(this.value)) {
+                showSuccess('subject');
+            } else {
+                showError('subject', 'Please enter a subject (at least 3 characters)');
+            }
+        });
+
+        document.getElementById('message').addEventListener('blur', function() {
+            if (validateMessage(this.value)) {
+                showSuccess('message');
+            } else {
+                showError('message', 'Please enter a message (at least 10 characters)');
+            }
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            let isValid = true;
+            
+            // Validate all fields
+            if (!validateName(name)) {
+                showError('name', 'Please enter a valid name (at least 2 characters)');
+                isValid = false;
+            } else {
+                showSuccess('name');
+            }
+            
+            if (!validateEmail(email)) {
+                showError('email', 'Please enter a valid email address');
+                isValid = false;
+            } else {
+                showSuccess('email');
+            }
+            
+            if (!validatePhone(phone)) {
+                showError('phone', 'Please enter a valid phone number');
+                isValid = false;
+            } else {
+                showSuccess('phone');
+            }
+            
+            if (!validateSubject(subject)) {
+                showError('subject', 'Please enter a subject (at least 3 characters)');
+                isValid = false;
+            } else {
+                showSuccess('subject');
+            }
+            
+            if (!validateMessage(message)) {
+                showError('message', 'Please enter a message (at least 10 characters)');
+                isValid = false;
+            } else {
+                showSuccess('message');
+            }
+            
+            if (isValid) {
+                // Show loading state
+                submitBtn.classList.add('loading');
+                btnText.textContent = 'Sending...';
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    // Reset form
+                    form.reset();
+                    
+                    // Remove all validation classes
+                    document.querySelectorAll('.form-control').forEach(field => {
+                        field.classList.remove('error', 'success');
+                    });
+                    
+                    document.querySelectorAll('.error-message').forEach(error => {
+                        error.classList.remove('show');
+                    });
+                    
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    
+                    // Reset button
+                    submitBtn.classList.remove('loading');
+                    btnText.textContent = 'Send Message';
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

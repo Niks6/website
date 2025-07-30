@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "image": "../images/1.jpg",
+    "company": "Samsung",
+    "item": "Earbuds",
+    "Description": "Wireless earbuds with noise cancellation and deep bass for immersive audio experience.",
+    "stock": 50,
+    "price": 199,
+    "wholeSale": 125,
+    "MRP": 599
+  },
+  {
+    "id": 2,
+    "image": "../images/2.jpg",
+    "company": "Nike",
+    "item": "Running Shoes",
+    "Description": "Lightweight and breathable shoes with responsive cushioning for daily runs.",
+    "stock": 3,
+    "price": 129,
+    "wholeSale": 85,
+    "MRP": 299
+  },
+  {
+    "id": 3,
+    "image": "../images/3.jpg",
+    "company": "Apple",
+    "item": "Smart Watch",
+    "Description": "Feature-rich smartwatch with health tracking, GPS, and seamless iOS integration.",
+    "stock": 75,
+    "price": 349,
+    "wholeSale": 290,
+    "MRP": 499
+  },
+  {
+    "id": 4,
+    "image": "../images/4.jpg",
+    "company": "Sony",
+    "item": "Bluetooth Speaker",
+    "Description": "Portable speaker with 24-hour battery life and water resistance.",
+    "stock": 90,
+    "price": 89,
+    "wholeSale": 60,
+    "MRP": 149
+  },
+  {
+    "id": 5,
+    "image": "../images/5.jpg",
+    "company": "Lenovo",
+    "item": "Laptop",
+    "Description": "14-inch ultrabook with Intel i5 processor, 8GB RAM and SSD storage.",
+    "stock": 30,
+    "price": 699,
+    "wholeSale": 620,
+    "MRP": 999
+  },
+  {
+    "id": 6,
+    "image": "../images/6.jpg",
+    "company": "Philips",
+    "item": "Trimmer",
+    "Description": "Cordless grooming trimmer with long-lasting blades and fast charging.",
+    "stock": 200,
+    "price": 39,
+    "wholeSale": 25,
+    "MRP": 79
+  },
+  {
+    "id": 7,
+    "image": "../images/7.jpg",
+    "company": "Realme",
+    "item": "Smartphone",
+    "Description": "Mid-range phone with AMOLED display and 64MP triple camera system.",
+    "stock": 60,
+    "price": 249,
+    "wholeSale": 180,
+    "MRP": 399
+  },
+  {
+    "id": 8,
+    "image": "../images/8.jpg",
+    "company": "HP",
+    "item": "Printer",
+    "Description": "All-in-one wireless inkjet printer ideal for home and office use.",
+    "stock": 45,
+    "price": 109,
+    "wholeSale": 85,
+    "MRP": 159
+  },
+  {
+    "id": 9,
+    "image": "../images/9.jpg",
+    "company": "JBL",
+    "item": "Headphones",
+    "Description": "Over-ear wireless headphones with rich bass and 40-hour battery life.",
+    "stock": 85,
+    "price": 149,
+    "wholeSale": 100,
+    "MRP": 249
+  },
+  {
+    "id": 10,
+    "image": "../images/10.jpg",
+    "company": "Boat",
+    "item": "Soundbar",
+    "Description": "Powerful home theater soundbar with built-in subwoofer and Bluetooth connectivity.",
+    "stock": 25,
+    "price": 179,
+    "wholeSale": 130,
+    "MRP": 299
+  }
+]
