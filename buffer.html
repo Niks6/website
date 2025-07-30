@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buffering - Server Authorization</title>
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .buffering-container {
+            margin: 30px 0;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #4ade80;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .status {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 15px 0;
+        }
+
+        .download-section {
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .download-section.authorized {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .download-button {
+            background: #4ade80;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .download-button:hover {
+            background: #22c55e;
+            transform: translateY(-1px);
+        }
+
+        .download-button:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .authorization-message {
+            color: #60a5fa;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Request Processing</h1>
+        
+        <div class="buffering-container" id="bufferingContainer">
+            <div class="spinner"></div>
+            <div class="status" id="statusText">Buffering...</div>
+        </div>
+        
+        <div class="download-section" id="downloadSection">
+            <div class="authorization-message">Payment Received. Download your Invoice</div>
+            <button class="download-button" id="downloadButton" onclick="downloadFile()">
+                Download Invoice
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function checkServerAuthorization() {
+            const statusText = document.getElementById('statusText');
+            const bufferingContainer = document.getElementById('bufferingContainer');
+            const downloadSection = document.getElementById('downloadSection');
+            
+            const statusMessages = [
+                'Buffering...',
+                'Connecting to server...',
+                'Sending Request to Seller',
+                'Validating request...',
+                'Waiting for the Payment Confirmation...',
+            ];
+            
+            let currentIndex = 0;
+            
+            const statusInterval = setInterval(() => {
+                if (currentIndex < statusMessages.length - 1) {
+                    currentIndex++;
+                    statusText.textContent = statusMessages[currentIndex];
+                }
+            }, 2000);
+            
+            const authorizationTime = 8000 + Math.random() * 4000;
+            
+            setTimeout(() => {
+                clearInterval(statusInterval);
+                bufferingContainer.classList.add('hidden');
+                downloadSection.classList.add('authorized');
+                
+            }, authorizationTime);
+        }
+
+        // Download function
+        function downloadFile() {
+            const button = document.getElementById('downloadButton');
+            
+            // Disable button during download
+            button.disabled = true;
+            button.textContent = 'Downloading...';
+            
+            // Simulate download
+            setTimeout(() => {
+                // Create and download a sample file
+                const content = "Your authorized file content\nDownloaded at: " + new Date().toLocaleString();
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'authorized_file.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                button.disabled = false;
+                button.textContent = 'Download Complete';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.textContent = 'Download Invoice';
+                    button.style.background = '#4a90e2';
+                }, 3000);
+                
+            }, 1000);
+        }
+
+        checkServerAuthorization();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+mongodb+srv://guptaelectr:golu@1234@cluster0.wyklpcr.mongodb.net/

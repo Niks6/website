@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #111827;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-navbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+            border-bottom: 2px solid white;
+        }
+
+        .navbar-brand a {
+            position: relative;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2vw;
+            text-shadow: 5px 5px 8px yellowgreen;
+        }
+
+
+        .navbar ul {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+
+        .nav-item {
+            margin: 1.5rem;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            background-color: #4169E1;
+            border-radius: 5px;
+        }
+
+        .nav-item a {
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 0.5vw;
+            font-size: 1vw;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+        }
+
+        .nav-item:hover,
+        .nav-item:focus {
+            color: #fff;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            right: 1rem;
+            z-index: 1100;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-menu {
+                visibility: hidden;
+                display: flex;
+                flex-direction: column;
+                background-color: #0B1426;
+                width: 100%;
+                position: absolute;
+                left: 0;
+                z-index: 1000;
+                padding: 1rem 0;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .navbar-brand a {
+                font-size: 4vw;
+            }
+
+            .navbar-menu.active {
+                visibility: visible;
+            }
+
+            .nav-item {
+                width: 100%;
+                /* border: 2px solid red; */
+                background-color: #4169E1;
+                border-radius: 2vw;
+                margin: 6vw;
+                padding: 2vw;
+                gap: 2vw;
+                text-align: center;
+            }
+
+            .nav-link {
+                display: block;
+                width: 100%;
+                padding: 1rem;
+                border-radius: 0;
+            }
+
+            .nav-item a {
+                font-size: 3vw;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 100px;
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF6347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        /* Content Sections */
+        .content {
+            padding: 3rem 0;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .section:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .section h2 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Owner Section */
+        .owner-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .owner-image {
+            text-align: center;
+        }
+
+        .owner-placeholder {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .owner-placeholder:hover {
+            transform: scale(1.05);
+        }
+
+        /* Service Area Map */
+        .service-area {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #4169E1, #6495ED);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 3px dashed rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #FFD700;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .stat-label {
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+
+        /* Contact CTA */
+        .cta {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            margin: 3rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .cta h2 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #FF6347, #FFA500);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #20B2AA, #48D1CC);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .owner-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+
+    <header class="section-navbar">
+        <div class="navbar-brand">
+            <a href="index.html">
+                <h1>Gupta Electronics</h1>
+            </a>
+        </div>
+
+        <nav class="navbar">
+            <div class="hamburger" id="hamburger">
+                &#9776;
+            </div>
+            <ul class="navbar-menu" id="navbar-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="addToCart.html" class="nav-link ckt" id="cktValue">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>About Gupta Electronics</h1>
+            <p class="hero-subtitle">Your Trusted Electronics Store, Now Online</p>
+            <p>Serving our community with quality products and personal service since 2015</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="content">
+        <div class="container">
+            <!-- Our Story -->
+            <section class="section">
+                <h2>Our Story</h2>
+                <p>Sunrise General Store started as a small family business with a simple dream - to serve our local
+                    community with quality products at fair prices. What began in 2015 as a modest neighborhood store
+                    has grown into a trusted name, known for personal service and reliability.</p>
+                <p>When the world went digital, we decided to bring our store online to better serve our customers. Now
+                    you can shop from the comfort of your home and still receive the same personal attention and care
+                    that has made us a beloved part of the community.</p>
+            </section>
+
+            <!-- Meet the Owner -->
+            <section class="section">
+                <h2>Meet the Owner</h2>
+                <div class="owner-section">
+                    <div class="owner-image">
+                        <div class="owner-placeholder">👨‍💼</div>
+                    </div>
+                    <div class="owner-info">
+                        <p><strong>Rajesh Kumar</strong> has been serving the local community for over 8 years. Starting
+                            with a small investment and big dreams, he has built Sunrise General Store into a trusted
+                            household name.</p>
+                        <p>"I believe in treating every customer like family. Whether you visit our physical store or
+                            shop online, you'll always receive the same warmth and quality service that we're known
+                            for."</p>
+                        <p>Rajesh personally oversees every aspect of the business, from product selection to delivery,
+                            ensuring that every customer receives the best possible experience.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Service Area -->
+            <section class="section">
+                <h2>Our Service Area</h2>
+                <div class="service-area">
+                    <div class="map-placeholder">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📍</div>
+                        <div>We serve Within 100km</div>
+                        <div style="font-size: 0.9rem; margin-top: 0.5rem;">GST Billing on orders above ₹500</div>
+                    </div>
+                    <p>We proudly serve customers within a 100-kilometer radius of our store location. Our delivery
+                        network covers major towns, villages, and rural areas, ensuring that quality products reach
+                        every doorstep.</p>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">5000+</span>
+                        <span class="stat-label">Happy Customers</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">2000+</span>
+                        <span class="stat-label">Products Available</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">8+</span>
+                        <span class="stat-label">Years of Service</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What We Offer -->
+            <section class="section">
+                <h2>What We Offer</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <span class="service-icon">🛒</span>
+                        <h3>General Groceries</h3>
+                        <p>Daily essentials, fresh vegetables, fruits, dairy products, and household items carefully
+                            selected for quality and freshness.</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">🚚</span>
+                        <h3>Exciting Offers</h3>
+                        <p>Exciting Offers on the Large amount of orders</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">📱</span>
+                        <h3>Easy Online Ordering</h3>
+                        <p>Simple website interface, phone orders accepted, and WhatsApp ordering available for your
+                            convenience.</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">💰</span>
+                        <h3>Competitive Prices</h3>
+                        <p>Fair pricing with no hidden charges. Regular discounts and special offers for our loyal
+                            customers.</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">🤝</span>
+                        <h3>Personal Service</h3>
+                        <p>Direct communication with the owner, personalized recommendations, and the same care you'd
+                            expect from your neighborhood store.</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">⏰</span>
+                        <h3>Flexible Timing</h3>
+                        <p>Extended hours, advance ordering for special occasions, and emergency delivery services when
+                            you need them most.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="cta">
+                <h2>Ready to Shop?</h2>
+                <p>Experience the convenience of online shopping with the personal touch of your local store</p>
+                <div class="btn-group">
+                    <a href="products.html" class="btn">Browse Products</a>
+                    <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script type="module" src="./src/shopping-view/about.js">
+
+    </script>
+</body>
+
+</html>
